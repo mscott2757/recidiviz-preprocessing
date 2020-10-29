@@ -7,8 +7,8 @@ child_or_adult_abuse,182,154,299
 child_molestation,194,202,1728
 criminal_damage,143,140,163
 domestic_violence,212,238,168
-raw_possession,3610,3291,3570
-raw_trafficking,2210,2724,5707
+drug_possession,3610,3291,3570
+drug_trafficking,2210,2724,5707
 dui,1290,1426,1598
 escape,122,108,167
 forgery,282,384,417
