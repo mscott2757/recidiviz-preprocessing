@@ -73,14 +73,14 @@ total_population_data = pd.DataFrame(
     columns=['compartment', 'total_population', 'time_step', 'crime_type', 'is_violent'])
 
 # TRANSITIONS TABLE
-recidiviz_3_year_rate = 0.391
+ricivism_3_year_rate = 0.391
 average_LOS = {crime: np.mean(population_data[crime]) / np.mean(admissions_data[crime]) for crime in crimes}
 
 for crime in crimes:
     crime_transitions_data = pd.DataFrame({
         'compartment': ['prison', 'release', 'release'],
         'outflow_to': ['release', 'prison', 'release'],
-        'total_population': [1, recidiviz_3_year_rate, 1 - recidiviz_3_year_rate],
+        'total_population': [1, ricivism_3_year_rate, 1 - ricivism_3_year_rate],
         'compartment_duration': [average_LOS[crime], 3, 80],
         'crime_type': [crime] * 3,
         'is_violent': [is_violent_map[crime]] * 3
