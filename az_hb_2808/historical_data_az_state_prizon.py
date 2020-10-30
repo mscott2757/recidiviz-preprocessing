@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 
 reference_data = 2020;
-recidiviz_3_year_rate = 0.391
 
 historical_data_2019 = pd.read_csv('2019.csv')
 historical_data_2018 = pd.read_csv('2018.csv')
@@ -74,6 +73,19 @@ total_population_data = pd.DataFrame(
     columns=['compartment', 'total_population', 'time_step', 'crime_type', 'is_violent'])
 
 # TRANSITIONS TABLE
+recidiviz_3_year_rate = 0.391
+average_LOS = {crime: np.mean(population_data[crime]) / np.mean(admissions_data[crime]) for crime in crimes}
+
+for crime in crimes:
+    crime_transitions_data = pd.DataFrame({
+        'compartment': ['prison', 'release', 'release'],
+        'outflow_to': ['release', 'prison', 'release'],
+        'total_population': [1, recidiviz_3_year_rate, 1 - recidiviz_3_year_rate],
+        'compartment_duration': [average_LOS[crime], 3, 80],
+        'crime_type': [crime] * 3,
+        'is_violent': [is_violent_map[crime]] * 3
+    })
+    transitions_data = pd.concat([transitions_data, crime_transitions_data])
 
 # OUTFLOWS TABLE
 for crime in crimes:
