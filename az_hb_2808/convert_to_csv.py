@@ -18,15 +18,14 @@ def format_crime(crime):
     return crime
 
 def parse_data(data):
-    data = data.replace(',', '')
-    all = data.split(' ')
-    return [all[2], all[5], all[8]]
+    data = data.split(' ')
+    return [data[2], data[5], data[8]]
 
 def parse_file(file_name, output_file_name):
     input_file = open(file_name, 'r')
     name = file_name.split('.')[0]
     with open(output_file_name, 'w', newline='') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, delimiter=';')
         writer.writerow(columns)
         for line in input_file.readlines():
             line = line.split('\n')[0]

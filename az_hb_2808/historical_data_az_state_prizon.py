@@ -3,9 +3,9 @@ import numpy as np
 
 reference_data = 2020;
 
-historical_data_2019 = pd.read_csv('2019.csv')
-historical_data_2018 = pd.read_csv('2018.csv')
-historical_data_2017 = pd.read_csv('2017.csv')
+historical_data_2019 = pd.read_csv('2019.csv', sep=';', thousands=',')
+historical_data_2018 = pd.read_csv('2018.csv', sep=';', thousands=',')
+historical_data_2017 = pd.read_csv('2017.csv', sep=';', thousands=',')
 
 crimes = historical_data_2019.crime.to_list()
 
