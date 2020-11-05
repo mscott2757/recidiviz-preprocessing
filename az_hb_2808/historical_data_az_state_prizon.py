@@ -78,12 +78,18 @@ average_LOS = {crime: np.mean(population_data[crime]) / np.mean(admissions_data[
 
 for crime in crimes:
     crime_transitions_data = pd.DataFrame({
-        'compartment': ['prison', 'release', 'release'],
-        'outflow_to': ['release', 'prison', 'release'],
-        'total_population': [1, recidivism_3_year_rate, 1 - recidivism_3_year_rate],
-        'compartment_duration': [average_LOS[crime], 3, 80],
-        'crime_type': [crime] * 3,
-        'is_violent': [is_violent_map[crime]] * 3
+        'compartment': ['prison', 'release', 'release', 'release', 'release'],
+        'outflow_to': ['release', 'prison', 'prison', 'prison', 'release'],
+        'total_population': [
+            1,
+            recidivism_3_year_rate / 3,
+            recidivism_3_year_rate / 3,
+            recidivism_3_year_rate / 3,
+            1 - recidivism_3_year_rate
+        ],
+        'compartment_duration': [average_LOS[crime], 1, 2, 3, 80],
+        'crime_type': [crime] * 5,
+        'is_violent': [is_violent_map[crime]] * 5
     })
     transitions_data = pd.concat([transitions_data, crime_transitions_data])
 
